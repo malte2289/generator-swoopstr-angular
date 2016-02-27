@@ -10,7 +10,8 @@
   },
   "files": [
     "generators",
-    "generators/controller"
+    "generators/controller",
+    "base.js"
   ],
   "main": "generators/index.js",
   "keywords": [
