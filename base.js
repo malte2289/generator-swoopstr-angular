@@ -21,6 +21,8 @@ var base = module.exports = yeoman.generators.Base.extend({
       moduleName: me._getModuleFromName(me.name),
       componentName: me._getComponentFromName(me.name)
     };
+
+    console.log(this.context);
   },
   _templateAngularFile: function(src, dist, context)
   {
@@ -28,6 +30,7 @@ var base = module.exports = yeoman.generators.Base.extend({
       context = this.context;
     }
     this.fs.copyTpl(this.templatePath(src), this.destinationPath(this._getPath(dist)), context);
+
   },
 	/**
    *
@@ -36,11 +39,12 @@ var base = module.exports = yeoman.generators.Base.extend({
    */
   _getModuleFromName: function(name){
     var nameSplitted = name.split(".");
-
+    var module = this.fs.readJSON(this.destinationPath('bower.json'));
+    module = module.name;
     if(nameSplitted.length === 1){
-      return this.appname;
+      return module;
     }else{
-      return this.appname+"."+nameSplitted.slice(0, -1).join('.');
+      return module +"."+nameSplitted.slice(0, -1).join('.');
     }
   },
   _getComponentFromName: function(name)
