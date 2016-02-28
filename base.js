@@ -64,6 +64,17 @@ var base = module.exports = yeoman.generators.Base.extend({
     pathArray.splice(1, 1);
     return pathArray.join('/');
   },
+  _generateTest: function(type){
+    this.composeWith('swoopstr-angular:test', {
+      args: [
+        this.context.moduleName, this.context.componentName, type
+      ],
+      options: {nested: true, appName: this.appName}},
+    {
+        local: __dirname+'/generators/test'
+
+    })
+  },
   angularBasePath: 'src'
 
 });

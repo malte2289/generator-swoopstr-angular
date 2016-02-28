@@ -11,6 +11,9 @@ module.exports = base.extend({
     var data= this.fs.read(path, 'utf8');
     var result = data.replace(/Ctrl/g,me.context.componentName+"Ctrl");
     this.fs.write(path, result);
+  },
+  install: function(){
+    this._generateTest('controller');
   }
 });
 

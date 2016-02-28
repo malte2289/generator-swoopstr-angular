@@ -11,6 +11,7 @@
   "files": [
     "generators",
     "generators/controller",
+    "generators/test",
     "base.js"
   ],
   "main": "generators/index.js",

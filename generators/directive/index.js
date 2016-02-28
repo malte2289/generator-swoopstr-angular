@@ -11,5 +11,8 @@ module.exports = base.extend({
     var data= this.fs.read(path, 'utf8');
     var result = data.replace(/DRIV/g,me.context.componentName);
     this.fs.write(path, result);
+  },
+  install: function(){
+    this._generateTest('directive');
   }
 });
