@@ -4,6 +4,7 @@ var assert = require('yeoman-assert');
 var helpers = require('yeoman-generator').test;
 var fs = require('fs-extra');
 
+
 describe('generator-swoopstr-angular:test', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../generators/test'))
