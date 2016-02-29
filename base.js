@@ -4,6 +4,7 @@
 //  }
 //}
 var yeoman = require('yeoman-generator');
+var _ = require('lodash');
 
 var base = module.exports = yeoman.generators.Base.extend({
 
@@ -29,7 +30,7 @@ var base = module.exports = yeoman.generators.Base.extend({
     if(typeof context === 'undefined'){
       context = this.context;
     }
-    this.fs.copyTpl(this.templatePath(src), this.destinationPath(this._getPath(dist)), context);
+    this.fs.copyTpl(this.templatePath(src), this.destinationPath(this._getPath()), context);
 
   },
 	/**
@@ -54,14 +55,20 @@ var base = module.exports = yeoman.generators.Base.extend({
     return firstLetter + name.substr(1);
   },
   _getFileName: function(){
-    return this.context.componentName.toLowerCase()
+    return _.kebabCase(this.context.componentName);
   },
-  _getPath: function(fileName){
+  _getFolderName: function(){
+    return _.kebabCase(this.context.moduleName);
+  },
+  _getPath: function(){
     var me = this;
     var pathArray = this.context.moduleName.split('.');
+    var fileName = _.compact([me._getFileName(), me.fileSuffix, 'js']).join('.');
     pathArray.push(fileName);
     pathArray.unshift(me.angularBasePath);
     pathArray.splice(1, 1);
+
+    console.log(pathArray);
     return pathArray.join('/');
   },
   _generateTest: function(type){
@@ -75,6 +82,7 @@ var base = module.exports = yeoman.generators.Base.extend({
 
     })
   },
-  angularBasePath: 'src'
+  angularBasePath: 'src',
+  fileSuffix: ''
 
 });

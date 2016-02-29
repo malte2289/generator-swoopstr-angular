@@ -6,7 +6,7 @@ module.exports = base.extend({
     var me = this;
     this._templateAngularFile('_.service.js', me._getFileName()+'.service.js')
 
-    var path = this.destinationPath(me._getPath(me._getFileName()) +'.service.js');
+    var path = this.destinationPath(me._getPath());
 
     var data= this.fs.read(path, 'utf8');
     var result = data.replace(/SRV/g,me.context.componentName);
@@ -14,5 +14,6 @@ module.exports = base.extend({
   },
   install: function(){
     this._generateTest('service');
-  }
+  },
+  fileSuffix: 'service'
 });

@@ -12,17 +12,17 @@ describe('generator-swoopstr-angular:controller', function () {
         // `dir` is the path to the new temporary directory
         fs.copy(path.join(__dirname, '../test/bower.json'), dir + '/bower.json', done2);
       })
-      .withArguments("test")
+      .withArguments("test.testModul")
       .on('end', done);
   });
 
   it('create controller file', function () {
     assert.file([
-      'src/test.controller.js'
+      'src/test/test-modul.controller.js'
     ]);
   });
 
   it('rename ctrl function name', function() {
-    assert.fileContent('src/test.controller.js', 'TestCtrl');
+    assert.fileContent('src/test/test-modul.controller.js', 'TestModulCtrl');
   })
 });

@@ -8,5 +8,6 @@ module.exports = base.extend({
   },
   install: function(){
     this._generateTest('provider');
-  }
+  },
+  fileSuffix: 'provider'
 });
