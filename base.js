@@ -12,6 +12,8 @@ var base = module.exports = yeoman.generators.Base.extend({
     yeoman.generators.Base.apply(this, arguments);
     var me = this;
     me.argument('name', { type: String, desc: "name of class to generate", required: true});
+    me.argument('basePath', {type: String, required: false, defaults: 'src' });
+    me.option('ignore-test');
 
     this.initializing();
   },
@@ -22,6 +24,7 @@ var base = module.exports = yeoman.generators.Base.extend({
       moduleName: me._getModuleFromName(me.name),
       componentName: me._getComponentFromName(me.name)
     };
+    me.angularBasePath =  me.basePath;
 
     console.log(this.context);
   },
@@ -72,17 +75,19 @@ var base = module.exports = yeoman.generators.Base.extend({
     return pathArray.join('/');
   },
   _generateTest: function(type){
-    this.composeWith('swoopstr-angular:test', {
-      args: [
-        this.context.moduleName, this.context.componentName, type
-      ],
-      options: {nested: true, appName: this.appName}},
-    {
-        local: __dirname+'/generators/test'
+    if(!this['ignore-test']) {
+      this.composeWith('swoopstr-angular:test', {
+          args: [
+            this.context.moduleName, this.context.componentName, type
+          ],
+          options: {nested: true, appName: this.appName}
+        },
+        {
+          local: __dirname + '/generators/test'
 
-    })
+        })
+    }
   },
-  angularBasePath: 'src',
   fileSuffix: ''
 
 });
